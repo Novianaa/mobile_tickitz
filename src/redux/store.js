@@ -8,7 +8,7 @@ import rootReducers from './reducer/index'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'schedule', 'movie']
+  whitelist: ['auth', 'schedule', 'movie', 'seat']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

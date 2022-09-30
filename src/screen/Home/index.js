@@ -1,12 +1,22 @@
 import React, { useEffect } from 'react';
-import { ScrollView, View, Text, Image, Button, StyleSheet, TextInput, Pressable, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Text, Image, Button, StyleSheet, TextInput, Pressable, ActivityIndicator, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScheduleNow, ScheduleUpcoming } from '../../redux/actions/Schedule'
+import messaging from '@react-native-firebase/messaging';
 
 function Home({ props, navigation }) {
   let { data, loading } = useSelector((s) => s.schedule)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage))
+    });
+
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     dispatch(ScheduleNow())
   }, [dispatch])

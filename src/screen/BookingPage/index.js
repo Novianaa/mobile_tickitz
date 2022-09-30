@@ -5,18 +5,40 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ebu from '../../assets/image/ebu.png'
 import hiflix from '../../assets/image/hilix.png'
 import cineone from '../../assets/image/cineone21.png'
-import { useDispatch } from 'react-redux';
-import { BookingSeat } from '../../redux/actions/Booking'
+import { useDispatch, useSelector } from 'react-redux';
+// import { BookingSeat } from '../../redux/actions/Booking'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BookingSeat } from '../../redux/actions/BookingSeat'
 
+
+const initialState = {
+  movie_id: '',
+  schedule_id: '',
+  date: '',
+  time: '',
+}
 function BookingPage(props) {
+  console.log(props)
+  const { data } = useSelector((s) => s.seat)
+  const dispatch = useDispatch()
   const listSeat = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
   let [topSideSeat, setTopSideSeat] = useState([1, 2, 3, 4, 5, 6, 7]);
+  let [soldSeat, setSoldSeat] = useState([])
   const [selectedSeat, setSelectedSeat] = useState([])
-  const [soldSeat, setSoldSeat] = useState([])
-  const handleSelectedSeat = (data) => {
+  const [querySchedule, setQuerySchedule] = useState(initialState)
+  querySchedule.movie_id = props.route.params.dataMovie[0].id
+  querySchedule.schedule_id = props.route.params.schedule.id
+  querySchedule.date = props.route.params.dateSchedule
+  querySchedule.time = props.route.params.timeSchedule
 
+  useEffect(() => {
+    dispatch(BookingSeat(querySchedule.movie_id, querySchedule.schedule_id, querySchedule.date, querySchedule.time))
+  }, [dispatch, querySchedule.movie_id, querySchedule.schedule_id, querySchedule.date, querySchedule.time])
+  soldSeat = data
+  // console.log(soldSeat, 'ccca')
+
+  const handleSelectedSeat = (data) => {
     if (selectedSeat.includes(data)) {
       const seat = selectedSeat.filter(x => {
         return x !== data
@@ -32,15 +54,16 @@ function BookingPage(props) {
 
   }
   const handleCheckOut = async () => {
+
     if (!selectedSeat.length) {
       ToastAndroid.show("You haven't chosen a seat yet", ToastAndroid.LONG)
     }
     else {
       let token = await AsyncStorage.getItem('token')
-      // axios.post(`https://deploy-tickitz-be.herokuapp.com/api/v1/booking`, `Bearer ${token}`, dataBooking)
+      // axios.post(`https://backend-tickitz.vercel.app/api/v1/booking`, `Bearer ${token}`, dataBooking)
       axios({
         method: "POST",
-        url: `https://deploy-tickitz-be.herokuapp.com/api/v1/booking`,
+        url: `https://backend-tickitz.vercel.app/api/v1/booking`,
         headers: {
           authorization: `Bearer ${token}`
         },
@@ -55,17 +78,13 @@ function BookingPage(props) {
         .then((res) => {
           const result = res.data
           props.navigation.navigate('Payment', { result })
-          console.log(res, 'q1q1')
         }).catch((err) => {
-          console.log(err)
+          // console.log(err)
           Alert.alert(err.response.data.msg)
         })
     }
   }
-  // console.log(dataBooking.dataMovie[0].id)
-  // console.log(dataBooking.dateSchedule)
-  // console.log(dataBooking.schedule.id)
-  // console.log(dataBooking.seats)
+
 
   return (
     <ScrollView style={styles.container}>

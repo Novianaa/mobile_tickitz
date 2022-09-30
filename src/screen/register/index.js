@@ -15,7 +15,7 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(`https://deploy-tickitz-be.herokuapp.com/api/v1/auth/register`, formRegister)
+    axios.post(`https://backend-tickitz.vercel.app/api/v1/auth/register`, formRegister)
       .then((res) => {
         props.navigation.navigate('AuthScreen', {
           screen: 'Login',

@@ -26,7 +26,7 @@ export const BookingSeat = (formData) => async (dispatch) => {
   dispatch(BookingRequest())
   axios({
     method: 'POST',
-    url: `https://deploy-tickitz-be.herokuapp.com/api/v1/booking/`,
+    url: `https://backend-tickitz.vercel.app/api/v1/booking/`,
     data: formData,
     headers: {
       authorization: `Bearer ${token}`

@@ -18,23 +18,25 @@ const initialState = {
   date: '',
 };
 function DetailMovie(props) {
-
   let { data, loading } = useSelector((s) => s.movie)
   let schedule = useSelector((s) => s.schedule)
   const dispatch = useDispatch()
-  let [dateSchedule, setDateSchedule] = useState(new Date());
-  const [querySchedule, setQuerySchedule] = useState(initialState);
-  const [filter, setFilter] = useState([]);
+  let [dateSchedule, setDateSchedule] = useState(new Date())
+  const [querySchedule, setQuerySchedule] = useState(initialState)
+  const [filter, setFilter] = useState([])
   let { movie_id, location, date, page } = querySchedule
   querySchedule.movie_id = props.route.params.movie_id
-  const [open, setOpen] = useState(false);
-  const [timeSchedule, setTimeSchedule] = useState('');
+  const [open, setOpen] = useState(false)
+  const [timeSchedule, setTimeSchedule] = useState('')
+
   useEffect(() => {
     dispatch(GetDetailMovie(props.route.params.movie_id))
   }, [dispatch, props.route.params.movie_id])
+
   useEffect(() => {
     dispatch(GetScheduleByMovieId(querySchedule.movie_id, querySchedule.location, querySchedule.date, querySchedule.page))
   }, [dispatch, querySchedule.movie_id, querySchedule.location, querySchedule.date, querySchedule.page])
+
   const handleChooseDate = (value) => {
     let dateNow = new Date(Date.now()).toString();
     dateNow = moment(dateNow).format()
@@ -69,7 +71,7 @@ function DetailMovie(props) {
     } else {
       props.navigation.navigate('BookingPage', { ...passingData, schedule: data });
     }
-  };
+  }
   return (
     <ScrollView style={styles.container}>
       <FlatList data={data}
@@ -120,12 +122,7 @@ function DetailMovie(props) {
 
         <View style={styles.wrapperPicker}>
           <View style={{ marginBottom: 12 }}>
-            <DatePicker
-              modal
-              open={open}
-              date={dateSchedule}
-              fadeToColor="#FFFFFF"
-              textColor="#000000"
+            <DatePicker modal open={open} date={dateSchedule} fadeToColor="#FFFFFF" textColor="#000000"
               onConfirm={value => {
                 setOpen(false);
                 handleChooseDate(value);
