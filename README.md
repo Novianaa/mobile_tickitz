@@ -56,16 +56,12 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#relation">Relation</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -100,6 +96,9 @@ I development a web service for a cinema ticket booking system, where the user w
 <!-- GETTING STARTED -->
 ## Getting Started<hr />
 
+### Relation
+[Backend Tickitz](https://github.com/Novianaa/Backend-Tickitz)
+[Tickitz Web](https://github.com/Novianaa/tickitz-fe)
 
 ### Installation
 
@@ -122,7 +121,7 @@ I development a web service for a cinema ticket booking system, where the user w
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-[Link app menyusul](https://example.com)
+[Link download app](https://bit.ly/novia-tickitz)
 
 | Screen name                             | Screenshot                                                  |
 | --------------------------------------- | ----------------------------------------------------------- |
