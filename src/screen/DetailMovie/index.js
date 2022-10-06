@@ -80,7 +80,7 @@ function DetailMovie(props) {
           return (
             <View style={styles.wrapperDetailMovie}>
               <View style={styles.wrapper}>
-                <Image source={require('../../assets/image/Photo.png')} style={styles.film} />
+                <Image crossOrigin="anonymous" source={{ uri: `https://backend-tickitz.vercel.app/static/${item.cover}` }} style={styles.film} />
               </View>
               <Text style={styles.name}>{item.title}</Text>
               <Text style={styles.genre}>{item.categories}</Text>
@@ -206,7 +206,7 @@ function DetailMovie(props) {
                           ? ebu
                           : item.cinema === 'Hiflix'
                             ? hiflix
-                            : item.cinema === 'CineOne 21'
+                            : item.cinema === 'Cineone'
                               ? cineone : {
                                 uri: 'https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg',
                               }} />
@@ -265,24 +265,29 @@ const styles = StyleSheet.create({
     boxSizing: 'borderBox',
     borderRadius: 9,
     alignItems: 'center',
-    marginHorizontal: 85,
-    marginVertical: 20
+    marginHorizontal: 80,
+    marginVertical: 15
   },
   film: {
-    margin: 15,
+    margin: 10,
+    // borderRadius: 9,
+    // marginBottom: 15,
     borderRadius: 9,
+    alignSelf: 'center',
+    width: '90%',
+    height: 200
   },
   name: {
+    fontFamily: 'Mulish-ExtraBold',
     textAlign: 'center',
-    fontWeight: 'bold',
     fontSize: 20,
-    margin: 5,
+    // margin: 1,
     color: 'black'
   },
   genre: {
     textAlign: 'center',
     fontSize: 18,
-    margin: 15,
+    margin: 10,
 
   },
   wrapperDetail: {
@@ -298,21 +303,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textMuted: {
-    fontFamily: 'mulish',
-    fontSize: 18,
+    fontFamily: 'Mulish-Regular',
+    fontSize: 16,
     letterSpacing: 0.5,
     marginBottom: '5%'
   },
   textActive: {
     color: '#121212',
-    fontFamily: 'mulish',
-    fontSize: 18,
+    fontFamily: 'Mulish-Regular',
+    fontSize: 17,
     letterSpacing: 1,
     marginBottom: '10%'
 
   },
   wrapperSynopsis: {
-    margin: '3%'
+    marginHorizontal: '3%'
   },
   wrapperSchedule: {
     backgroundColor: '#DEDEDE',

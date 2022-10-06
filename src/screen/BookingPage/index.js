@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     borderColor: '#5F2EEA',
     borderWidth: 1,
     borderStyle: 'solid',
-    minWidth: 150,
+    width: 100,
     paddingHorizontal: 15,
     paddingVertical: 11,
   },
